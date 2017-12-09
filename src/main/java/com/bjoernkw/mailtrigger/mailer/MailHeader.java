@@ -7,7 +7,6 @@ public class MailHeader {
     String cc;
     String bcc;
     String subject;
-    
 
     MailHeader(String recipient) {
         this.recipient = recipient;
