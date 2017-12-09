@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to MailTrigger!</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="webjars/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="css/main.css">
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+    <a class="navbar-brand" href="#">MailTrigger</a>
+</nav>
+<div class="container">
+    <div class="main">
+        <h1>Welcome to MailTrigger!</h1>
+    </div>
+</div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&copy; <span th:text="${year}">2018</span> <a href="https:/bjoernkw.com">Björn Wilmsmann IT Services</a></span>
+    </div>
+</footer>
+<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="webjars/tether/1.4.0/dist/js/tether.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</body>
+</html>
