@@ -1,4 +1,4 @@
-package com.bjoernkw.mailTrigger;
+package com.bjoernkw.mailtrigger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
