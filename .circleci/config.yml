@@ -42,8 +42,7 @@ jobs:
 
       # Save artifacts
       - store_artifacts:
-          path: ./target/*.jar
-          destination: build
+          path: ./target
 
       # Upload test results
       - store_test_results:
