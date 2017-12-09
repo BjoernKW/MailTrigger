@@ -1,4 +1,5 @@
 from: bjoern@bjoernkw.com
+to: {{TO}}
 subject: Test email sent by MailTrigger
 +++
 Dear {{FIRST_NAME}},

@@ -46,6 +46,7 @@ public class MailTemplatePlaceholderProcessorTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         Map<String, String> replacements = new HashMap<>();
+        replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
         MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor = new MailTemplatePlaceholderProcessor();

@@ -31,6 +31,7 @@ public class MailerTests {
                 .from("bjoern@bjoernkw.com");
 
         Map<String, String> replacements = new HashMap<>();
+        replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
         try {

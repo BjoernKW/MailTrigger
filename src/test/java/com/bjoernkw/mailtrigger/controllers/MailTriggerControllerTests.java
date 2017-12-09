@@ -38,6 +38,7 @@ public class MailTriggerControllerTests {
                 .then()
                 .statusCode(400);
 
+        replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
         given()
