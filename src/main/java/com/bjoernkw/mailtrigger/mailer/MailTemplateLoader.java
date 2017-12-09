@@ -76,21 +76,19 @@ class MailTemplateLoader {
     }
 
     private void setMailProperty(MailTemplate mailTemplate, String line) {
-        boolean accessible = false;
         String propertyName = this.getPropertyName(line);
         String propertyValue = this.getPropertyValue(line);
         Field field = null;
 
         try {
             field = mailTemplate.getClass().getDeclaredField(propertyName);
-            accessible = field.canAccess(field);
             field.setAccessible(true);
             field.set(mailTemplate, propertyValue);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             logger.error("{}", e);
         } finally {
             if (field != null) {
-                field.setAccessible(accessible);
+                field.setAccessible(false);
             }
         }
     }
