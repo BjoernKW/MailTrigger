@@ -51,8 +51,10 @@ class MailTemplateLoader {
         if (line != null) {
             String processedLine = line.trim();
 
-            if (processedLine.startsWith(this.separator))
+            if (processedLine.startsWith(this.separator)) {
                 return;
+            }
+
             if (readingText) {
                 if (mailTemplate.getTextLength() > 0) {
                     processedLine = "<br/>" + processedLine;

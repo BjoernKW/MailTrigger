@@ -34,7 +34,7 @@ public class Mailer {
     public void send(MailHeader mailHeader, URL templateURL, Map<String, String> replacements) {
         MailTemplate mailTemplate = mailTemplateLoader.load(templateURL);
         if (mailHeader != null) {
-            adjustMailTemplate(mailHeader, mailTemplate);
+            addHeaderInformationToMailTemplate(mailHeader, mailTemplate);
         }
         mailTemplatePlaceholderProcessor.replace(mailTemplate, replacements);
 
@@ -52,7 +52,7 @@ public class Mailer {
         this.send(null, templateURL, replacements);
     }
 
-    private void adjustMailTemplate(MailHeader mailHeader, MailTemplate mailTemplate) {
+    private void addHeaderInformationToMailTemplate(MailHeader mailHeader, MailTemplate mailTemplate) {
         warnIfSpecifiedMoreThanOnce(mailHeader.recipient, mailTemplate.getTo());
         if (mailTemplate.getTo() == null) {
             mailTemplate.setTo(mailHeader.recipient);

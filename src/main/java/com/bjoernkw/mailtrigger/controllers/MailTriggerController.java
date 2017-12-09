@@ -1,14 +1,16 @@
 package com.bjoernkw.mailtrigger.controllers;
 
 import com.bjoernkw.mailtrigger.MailTriggerApplication;
+import com.bjoernkw.mailtrigger.exceptions.ChannelNotFoundException;
 import com.bjoernkw.mailtrigger.mailer.Mailer;
+import com.bjoernkw.mailtrigger.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Controller
@@ -18,21 +20,34 @@ public class MailTriggerController {
     private Mailer mailer;
 
     @RequestMapping("/")
-    public String start() {
+    public String start(Model model) {
+        model.addAttribute("year", LocalDate.now().getYear());
+
         return "index";
     }
 
-    @RequestMapping("/sendMail/{channel}")
+    @RequestMapping(
+            value = "/api/v1/sendMail/{channel}",
+            method = RequestMethod.POST
+    )
     @ResponseBody
-    public String sendMail(
+    public Message sendMail(
             @PathVariable String channel,
             @RequestBody Map<String, String> replacements
     ) {
+        URL resourceURL = MailTriggerApplication.class.getResource(channel + ".md");
+        if (resourceURL == null) {
+            throw new ChannelNotFoundException();
+        }
+
         mailer.send(
-                MailTriggerApplication.class.getResource(channel + ".md"),
+                resourceURL,
                 replacements
         );
 
-        return "";
+        Message message = new Message();
+        message.setText("Email was sent.");
+
+        return message;
     }
 }

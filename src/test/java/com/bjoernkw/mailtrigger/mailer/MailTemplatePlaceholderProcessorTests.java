@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class MailTemplatePlaceholderProcessorTest {
+public class MailTemplatePlaceholderProcessorTests {
 
     @Test
     public void replace() {

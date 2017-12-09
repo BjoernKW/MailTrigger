@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class MailTriggerConfig {
 
     private String host;
-    private Integer port = 587;
+    private Integer port = 2525;
     private String username;
     private String password;
 

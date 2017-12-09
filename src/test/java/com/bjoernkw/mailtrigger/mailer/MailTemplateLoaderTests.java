@@ -9,7 +9,7 @@ import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
-public class MailTemplateLoaderTest {
+public class MailTemplateLoaderTests {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

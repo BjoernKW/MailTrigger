@@ -3,6 +3,7 @@ package com.bjoernkw.mailtrigger.mailer;
 import com.bjoernkw.mailtrigger.exceptions.MailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -31,7 +32,7 @@ public class MailSender {
         this.mailRenderer = mailRenderer;
     }
 
-    // @Async
+    @Async
     public void send(MailTemplate mail) {
         requireNonNull(mail);
 
@@ -70,17 +71,17 @@ public class MailSender {
 
     }
 
-    private MimeMessage createMessage(Session session, MailTemplate mail)
+    private MimeMessage createMessage(Session session, MailTemplate mailTemplate)
             throws MessagingException {
         MimeMessage message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(mail.getFrom()));
+        message.setFrom(new InternetAddress(mailTemplate.getFrom()));
 
         try {
-            this.addRecipients(message, mail.getTo(), Message.RecipientType.TO);
-            this.addRecipients(message, mail.getCc(), Message.RecipientType.CC);
-            this.addRecipients(message, mail.getBcc(), Message.RecipientType.BCC);
-            message.setSubject(mail.getSubject());
-            message.setContent(this.createMultipart(mail.getTextAsString(), "html"));
+            this.addRecipients(message, mailTemplate.getTo(), Message.RecipientType.TO);
+            this.addRecipients(message, mailTemplate.getCc(), Message.RecipientType.CC);
+            this.addRecipients(message, mailTemplate.getBcc(), Message.RecipientType.BCC);
+            message.setSubject(mailTemplate.getSubject());
+            message.setContent(this.createMultipart(mailTemplate.getTextAsString(), "html"));
         } catch (Exception e) {
             throw new MailException();
         }
