@@ -58,33 +58,33 @@ public class Mailer {
     }
 
     private void addHeaderInformationToMailTemplate(MailHeader mailHeader, MailTemplate mailTemplate) {
-        warnIfSpecifiedMoreThanOnce(mailHeader.getSubject(), mailTemplate.getSubject());
+        warnIfSpecifiedMultipleTimes(mailHeader.getSubject(), mailTemplate.getSubject());
         if (mailTemplate.getSubject() == null) {
             mailTemplate.setSubject(mailHeader.getSubject());
         }
 
-        warnIfSpecifiedMoreThanOnce(mailHeader.getFrom(), mailTemplate.getFrom());
+        warnIfSpecifiedMultipleTimes(mailHeader.getFrom(), mailTemplate.getFrom());
         if (mailTemplate.getFrom() == null) {
             mailTemplate.setFrom(mailHeader.getFrom());
         }
 
-        warnIfSpecifiedMoreThanOnce(mailHeader.getTo(), mailTemplate.getTo());
+        warnIfSpecifiedMultipleTimes(mailHeader.getTo(), mailTemplate.getTo());
         if (mailTemplate.getTo() == null) {
             mailTemplate.setTo(mailHeader.getTo());
         }
 
-        warnIfSpecifiedMoreThanOnce(mailHeader.getCc(), mailTemplate.getCc());
+        warnIfSpecifiedMultipleTimes(mailHeader.getCc(), mailTemplate.getCc());
         if (mailTemplate.getCc() == null) {
             mailTemplate.setCc(mailHeader.getCc());
         }
 
-        warnIfSpecifiedMoreThanOnce(mailHeader.getBcc(), mailTemplate.getBcc());
+        warnIfSpecifiedMultipleTimes(mailHeader.getBcc(), mailTemplate.getBcc());
         if (mailTemplate.getBcc() == null) {
             mailTemplate.setBcc(mailHeader.getBcc());
         }
     }
 
-    private void warnIfSpecifiedMoreThanOnce(String value1, String value2) {
+    private void warnIfSpecifiedMultipleTimes(String value1, String value2) {
         if (value1 != null && value2 != null) {
             logger.warn("Mail header values specified multiple times: {}, {}", value1, value2);
         }
