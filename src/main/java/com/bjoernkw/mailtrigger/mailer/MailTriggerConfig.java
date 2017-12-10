@@ -1,15 +1,21 @@
 package com.bjoernkw.mailtrigger.mailer;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("mailTrigger")
 public class MailTriggerConfig {
 
+    @Value("${mailTrigger.host}")
     private String host;
+
+    @Value("${mailTrigger.port}")
     private Integer port = 2525;
+
+    @Value("${mailTrigger.username}")
     private String username;
+
+    @Value("${mailTrigger.password}")
     private String password;
 
     public String getHost() {

@@ -33,6 +33,15 @@ folder in the project directory to the ```webapps``` directory of your servlet c
 4. The application should be available under ```http://HOST:PORT/NAME_OF_THE_WAR_FILE```,
 e.g. ```http://localhost:8080/mailTrigger-0.0.x-SNAPSHOT```
 
+## Configuration
+
+These environment variables are required for running MailTrigger:
+
+* ```SMTP_HOST```
+* ```SMTP_PORT```
+* ```SMTP_USERNAME```
+* ```SMTP_PASSWORD```
+
 ## Sending an email
 
 This HTTP call will load a template named ```test_channel.md``` and replace any placeholders with the replacements
