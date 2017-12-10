@@ -60,6 +60,10 @@ Once the app is started the REST API documentation is be available under ```/swa
 * [Maven](https://maven.apache.org/)
 * [Markdown](https://daringfireball.net/projects/markdown/)
 
+## License
+
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
 ## Authors
 
 * **[Björn Wilmsmann](https://bjoernkw.com)**
