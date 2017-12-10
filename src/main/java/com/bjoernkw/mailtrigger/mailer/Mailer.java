@@ -2,7 +2,6 @@ package com.bjoernkw.mailtrigger.mailer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
@@ -10,16 +9,22 @@ import java.util.Map;
 
 @Service
 public class Mailer {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private MailSender mailSender;
+    private final MailSender mailSender;
+    private final MailTemplateLoader mailTemplateLoader;
+    private final PlaceholderProcessor placeholderProcessor;
 
-    @Autowired
-    private MailTemplateLoader mailTemplateLoader;
-
-    @Autowired
-    private PlaceholderProcessor placeholderProcessor;
+    public Mailer(
+            MailSender mailSender,
+            MailTemplateLoader mailTemplateLoader,
+            PlaceholderProcessor placeholderProcessor
+    ) {
+        this.mailSender = mailSender;
+        this.mailTemplateLoader = mailTemplateLoader;
+        this.placeholderProcessor = placeholderProcessor;
+    }
 
     /**
      * Loads the given template from a URL, replaces the template's placeHolders

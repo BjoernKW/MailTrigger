@@ -4,7 +4,6 @@ import com.bjoernkw.mailtrigger.MailTriggerApplication;
 import com.bjoernkw.mailtrigger.exceptions.ChannelNotFoundException;
 import com.bjoernkw.mailtrigger.mailer.Mailer;
 import com.bjoernkw.mailtrigger.model.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,11 @@ import java.util.Map;
 @Controller
 public class MailTriggerController {
 
-    @Autowired
-    private Mailer mailer;
+    private final Mailer mailer;
+
+    public MailTriggerController(Mailer mailer) {
+        this.mailer = mailer;
+    }
 
     @RequestMapping("/")
     public String start(Model model) {
