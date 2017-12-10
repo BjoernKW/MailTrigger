@@ -19,6 +19,10 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
+      SMTP_HOST: "smtp.mailgun.org"
+      SMTP_PORT: 2525
+      SMTP_USERNAME: ""
+      SMTP_PASSWORD: ""
 
     steps:
       - checkout
