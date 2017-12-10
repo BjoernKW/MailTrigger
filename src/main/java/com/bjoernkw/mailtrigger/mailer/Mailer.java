@@ -19,7 +19,7 @@ public class Mailer {
     private MailTemplateLoader mailTemplateLoader;
 
     @Autowired
-    private MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor;
+    private PlaceholderProcessor placeholderProcessor;
 
     /**
      * Loads the given template from an URL, replaces the template's placeHolders
@@ -36,7 +36,7 @@ public class Mailer {
         if (mailHeader != null) {
             addHeaderInformationToMailTemplate(mailHeader, mailTemplate);
         }
-        mailTemplatePlaceholderProcessor.replace(mailTemplate, replacements);
+        placeholderProcessor.replace(mailTemplate, replacements);
 
         mailSender.send(mailTemplate);
     }

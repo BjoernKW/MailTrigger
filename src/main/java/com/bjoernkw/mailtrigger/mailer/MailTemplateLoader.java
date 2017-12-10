@@ -57,7 +57,11 @@ class MailTemplateLoader {
 
             if (readingText) {
                 if (mailTemplate.getTextLength() > 0) {
-                    processedLine = "<br/>" + processedLine;
+                    if (mailTemplate.getFormat().equals("html")) {
+                        processedLine = "<br>" + processedLine;
+                    } else {
+                        processedLine = "\r\n" + processedLine;
+                    }
                 }
                 mailTemplate.appendText(processedLine);
             } else {

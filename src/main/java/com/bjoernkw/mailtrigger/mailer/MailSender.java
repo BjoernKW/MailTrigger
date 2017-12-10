@@ -22,6 +22,7 @@ public class MailSender {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private MailTriggerConfig mailTriggerConfig;
+
     private MailRenderer mailRenderer;
 
     public MailSender(
@@ -81,7 +82,7 @@ public class MailSender {
             this.addRecipients(message, mailTemplate.getCc(), Message.RecipientType.CC);
             this.addRecipients(message, mailTemplate.getBcc(), Message.RecipientType.BCC);
             message.setSubject(mailTemplate.getSubject());
-            message.setContent(this.createMultipart(mailTemplate.getTextAsString(), "html"));
+            message.setContent(this.createMultipart(mailTemplate.getTextAsString(), mailTemplate.getFormat()));
         } catch (Exception e) {
             throw new MailException();
         }
@@ -100,11 +101,11 @@ public class MailSender {
         }
     }
 
-    private Multipart createMultipart(String content, String textStyle) throws MessagingException {
+    private Multipart createMultipart(String content, String format) throws MessagingException {
         Multipart multipart = new MimeMultipart();
         MimeBodyPart messageBodyPart = new MimeBodyPart();
         multipart.addBodyPart(messageBodyPart);
-        messageBodyPart.setText(this.mailRenderer.execute(content), StandardCharsets.UTF_8.name(), textStyle);
+        messageBodyPart.setText(this.mailRenderer.render(content, format), StandardCharsets.UTF_8.name(), format);
 
         return multipart;
     }

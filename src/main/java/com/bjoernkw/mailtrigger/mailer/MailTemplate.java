@@ -7,6 +7,8 @@ public class MailTemplate {
     private String cc;
     private String bcc;
     private String subject;
+    private String format = "html";
+
     private StringBuilder text = new StringBuilder();
 
     public String getFrom() {
@@ -47,6 +49,14 @@ public class MailTemplate {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
     }
 
     public void clearText() {

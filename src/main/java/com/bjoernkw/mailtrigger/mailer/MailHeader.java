@@ -14,21 +14,25 @@ public class MailHeader {
 
     public MailHeader from(String from) {
         this.from = from;
+
         return this;
     }
 
     public MailHeader cc(String cc) {
         this.cc = cc;
+
         return this;
     }
 
     public MailHeader bcc(String bcc) {
         this.bcc = bcc;
+
         return this;
     }
 
     public MailHeader subject(String subject) {
         this.subject = subject;
+
         return this;
     }
 }

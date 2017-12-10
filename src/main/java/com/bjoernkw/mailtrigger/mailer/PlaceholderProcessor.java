@@ -11,11 +11,11 @@ import java.util.regex.Pattern;
 import static java.util.Objects.requireNonNull;
 
 @Service
-public class MailTemplatePlaceholderProcessor {
+public class PlaceholderProcessor {
 
     private Pattern placeholderPattern;
 
-    public MailTemplatePlaceholderProcessor() {
+    public PlaceholderProcessor() {
         placeholderPattern = Pattern.compile("\\{\\{.+}}");
     }
 

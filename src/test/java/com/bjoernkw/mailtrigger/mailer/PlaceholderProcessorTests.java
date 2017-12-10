@@ -10,31 +10,31 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class MailTemplatePlaceholderProcessorTests {
+public class PlaceholderProcessorTests {
 
     @Test
     public void replace() {
-        MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor = new MailTemplatePlaceholderProcessor();
+        PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
 
         String textBegin = "Test";
         StringBuilder text = new StringBuilder(textBegin + "{{REPLACEMENT}}");
         String placeholder = "REPLACEMENT";
         String replacement = "Basic Test";
 
-        mailTemplatePlaceholderProcessor.replace(text, placeholder, replacement);
+        placeholderProcessor.replace(text, placeholder, replacement);
 
         assertEquals(text.toString(), (textBegin + replacement));
     }
 
     @Test
     public void replaceWithNull() {
-        MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor = new MailTemplatePlaceholderProcessor();
+        PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
 
         String textBegin = "Test";
         StringBuilder text = new StringBuilder(textBegin + "{{REPLACEMENT}}");
         String placeholder = "REPLACEMENT";
 
-        mailTemplatePlaceholderProcessor.replace(text, placeholder, null);
+        placeholderProcessor.replace(text, placeholder, null);
 
         assertEquals(text.toString(), textBegin);
     }
@@ -49,8 +49,8 @@ public class MailTemplatePlaceholderProcessorTests {
         replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
-        MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor = new MailTemplatePlaceholderProcessor();
-        mailTemplatePlaceholderProcessor.replace(mailTemplate, replacements);
+        PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
+        placeholderProcessor.replace(mailTemplate, replacements);
     }
 
     @Test(expected = ReplacementsMissingException.class)
@@ -61,7 +61,7 @@ public class MailTemplatePlaceholderProcessorTests {
 
         Map<String, String> replacements = new HashMap<>();
 
-        MailTemplatePlaceholderProcessor mailTemplatePlaceholderProcessor = new MailTemplatePlaceholderProcessor();
-        mailTemplatePlaceholderProcessor.replace(mailTemplate, replacements);
+        PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
+        placeholderProcessor.replace(mailTemplate, replacements);
     }
 }
