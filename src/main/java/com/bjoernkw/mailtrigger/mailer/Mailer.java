@@ -26,7 +26,7 @@ public class Mailer {
      * and sends the email.
      *
      * @param mailHeader   Meta information with at least a recipient
-     * @param templateURL  URL of the markdown template for this email. Usually those templates reside
+     * @param templateURL  URL of the Markdown template for this email. Usually those templates reside
      *                     in the classpath next to the calling class and a common idiom to obtain
      *                     the URL would be <code>Caller.class.getResource({fileName})</code>
      * @param replacements Map of replacements where the key is a placeholder and the value is the replacement
@@ -45,7 +45,7 @@ public class Mailer {
      * Convenience method for {@link Mailer#send(MailHeader, URL, Map)} where mail header information comes
      * from the mailTemplate.
      *
-     * @param templateURL  URL of the markdown template for this email
+     * @param templateURL  URL of the Markdown template for this email
      * @param replacements Map of replacements where the key is a placeholder and the value is the replacement
      */
     public void send(URL templateURL, Map<String, String> replacements) {
