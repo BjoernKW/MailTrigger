@@ -16,27 +16,25 @@ public class PlaceholderProcessorTests {
     public void replace() {
         PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
 
-        String textBegin = "Test";
-        StringBuilder text = new StringBuilder(textBegin + "{{REPLACEMENT}}");
+        String beginning = "Test";
         String placeholder = "REPLACEMENT";
         String replacement = "Basic Test";
 
-        placeholderProcessor.replace(text, placeholder, replacement);
+        String parsedText = placeholderProcessor.parseInputField(beginning + "${REPLACEMENT}", placeholder, replacement);
 
-        assertEquals(text.toString(), (textBegin + replacement));
+        assertEquals(beginning + replacement, parsedText);
     }
 
-    @Test
+    @Test(expected = ReplacementsMissingException.class)
     public void replaceWithNull() {
         PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
 
-        String textBegin = "Test";
-        StringBuilder text = new StringBuilder(textBegin + "{{REPLACEMENT}}");
+        String beginning = "Test";
         String placeholder = "REPLACEMENT";
 
-        placeholderProcessor.replace(text, placeholder, null);
+        String parsedText = placeholderProcessor.parseInputField(beginning + "${REPLACEMENT}", placeholder, null);
 
-        assertEquals(text.toString(), textBegin);
+        assertEquals(beginning, parsedText);
     }
 
     @Test
@@ -50,7 +48,7 @@ public class PlaceholderProcessorTests {
         replacements.put("FIRST_NAME", "John");
 
         PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
-        placeholderProcessor.replace(mailTemplate, replacements);
+        placeholderProcessor.parseMailTemplate(mailTemplate, replacements);
     }
 
     @Test(expected = ReplacementsMissingException.class)
@@ -62,6 +60,6 @@ public class PlaceholderProcessorTests {
         Map<String, String> replacements = new HashMap<>();
 
         PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
-        placeholderProcessor.replace(mailTemplate, replacements);
+        placeholderProcessor.parseMailTemplate(mailTemplate, replacements);
     }
 }

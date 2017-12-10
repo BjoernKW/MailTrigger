@@ -29,8 +29,8 @@ class MailTemplateLoader {
             reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8.name()));
             String line;
             while ((line = reader.readLine()) != null) {
-                readingText = this.isReadingText(readingText, line);
-                this.readTemplate(line, readingText, mailTemplate);
+                readingText = isReadingText(readingText, line);
+                readTemplate(line, readingText, mailTemplate);
             }
 
             return mailTemplate;
@@ -63,9 +63,9 @@ class MailTemplateLoader {
                         processedLine = "\r\n" + processedLine;
                     }
                 }
-                mailTemplate.appendText(processedLine);
+                mailTemplate.appendTextToBody(processedLine);
             } else {
-                this.setMailProperty(mailTemplate, processedLine);
+                setMailProperty(mailTemplate, processedLine);
             }
         }
     }
@@ -82,8 +82,8 @@ class MailTemplateLoader {
     }
 
     private void setMailProperty(MailTemplate mailTemplate, String line) {
-        String propertyName = this.getPropertyName(line);
-        String propertyValue = this.getPropertyValue(line);
+        String propertyName = getPropertyName(line);
+        String propertyValue = getPropertyValue(line);
         Field field = null;
 
         try {

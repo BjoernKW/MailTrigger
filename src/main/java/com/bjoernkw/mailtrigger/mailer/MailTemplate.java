@@ -9,7 +9,7 @@ public class MailTemplate {
     private String subject;
     private String format = "html";
 
-    private StringBuilder text = new StringBuilder();
+    private StringBuilder bodyText = new StringBuilder();
 
     public String getFrom() {
         return this.from;
@@ -59,29 +59,30 @@ public class MailTemplate {
         this.format = format;
     }
 
-    public void clearText() {
-        this.text = new StringBuilder();
+    public void clearBodyText() {
+        this.bodyText = new StringBuilder();
     }
 
-    public void appendText(String textLine) {
-        if (this.text.length() > 0) {
-            this.text.append("\n");
+    public void appendTextToBody(String textLine) {
+        if (this.bodyText.length() > 0) {
+            this.bodyText.append("\n");
         }
-        this.text.append(textLine);
+        this.bodyText.append(textLine);
     }
 
     public int getTextLength() {
-        return this.text.length();
+        return this.bodyText.length();
     }
 
     public String getTextAsString() {
-        return this.text.toString();
+        return this.bodyText.toString();
     }
 
     @Override
     public String toString() {
         return String.format(
-                "MailTemplate[from=%s, to=%s, cc=%s, bcc=%s, subject=%s, text=%s]",
-                from, to, cc, bcc, subject, text);
+                "MailTemplate[from=%s, to=%s, cc=%s, bcc=%s, subject=%s, bodyText=%s]",
+                from, to, cc, bcc, subject, bodyText
+        );
     }
 }

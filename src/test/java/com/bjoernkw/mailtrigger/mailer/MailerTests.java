@@ -27,8 +27,9 @@ public class MailerTests {
     @Test
     public void sendMail() throws Error {
         URL templateUrl = MailTriggerApplication.class.getResource("test_channel.md");
-        MailHeader mailHeader = new MailHeader("bjoern@bjoernkw.com")
-                .from("bjoern@bjoernkw.com");
+        MailHeader mailHeader = new MailHeader();
+        mailHeader.setTo("bjoern@bjoernkw.com");
+        mailHeader.setFrom("bjoern@bjoernkw.com");
 
         Map<String, String> replacements = new HashMap<>();
         replacements.put("TO", "bjoern@bjoernkw.com");

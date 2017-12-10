@@ -32,7 +32,7 @@ class MailRenderer {
 
             return renderer.render(document);
         } catch (Exception e) {
-            logger.error("Problem while rendering email: {}", e);
+            logger.error("A problem occurred while rendering an email: {}", e);
 
             return text;
         }

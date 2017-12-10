@@ -1,10 +1,13 @@
 package com.bjoernkw.mailtrigger.mailer;
 
 import com.bjoernkw.mailtrigger.exceptions.ReplacementsMissingException;
+import org.apache.commons.text.StrSubstitutor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,58 +19,58 @@ public class PlaceholderProcessor {
     private Pattern placeholderPattern;
 
     public PlaceholderProcessor() {
-        placeholderPattern = Pattern.compile("\\{\\{.+}}");
+        placeholderPattern = Pattern.compile("(\\$\\{.+})");
     }
 
-    public void replace(MailTemplate mailTemplate, Map<String, String> replacements) {
+    public void parseMailTemplate(MailTemplate mailTemplate, Map<String, String> replacements) {
         requireNonNull(mailTemplate);
         requireNonNull(replacements);
 
-        mailTemplate.setFrom(this.replace(mailTemplate.getFrom(), replacements));
-        mailTemplate.setTo(this.replace(mailTemplate.getTo(), replacements));
-        mailTemplate.setCc(this.replace(mailTemplate.getCc(), replacements));
-        mailTemplate.setBcc(this.replace(mailTemplate.getBcc(), replacements));
-        String replaceStr = this.replace(mailTemplate.getSubject(), replacements);
-        mailTemplate.setSubject(replaceStr);
+        mailTemplate.setFrom(parseInputField(mailTemplate.getFrom(), replacements));
+        mailTemplate.setTo(parseInputField(mailTemplate.getTo(), replacements));
+        mailTemplate.setCc(parseInputField(mailTemplate.getCc(), replacements));
+        mailTemplate.setBcc(parseInputField(mailTemplate.getBcc(), replacements));
+        mailTemplate.setSubject(parseInputField(mailTemplate.getSubject(), replacements));
 
-        String text = this.replace(mailTemplate.getTextAsString(), replacements);
-        Matcher matcher = placeholderPattern.matcher(text);
-        if (matcher.find()) {
-            throw new ReplacementsMissingException();
-        }
+        String text = parseInputField(mailTemplate.getTextAsString(), replacements);
 
-        mailTemplate.clearText();
-        mailTemplate.appendText(text);
+        mailTemplate.clearBodyText();
+        mailTemplate.appendTextToBody(text);
     }
 
-    private String replace(String input, Map<String, String> replacements) {
-        if (input != null && input.length() > 0) {
-            StringBuilder text = new StringBuilder(input);
-            for (Entry<String, String> entry : replacements.entrySet()) {
-                this.replace(text, entry.getKey(), entry.getValue());
-            }
+    protected String parseInputField(String input, String placeholder, String replacement) {
+        Map<String, String> replacements = new HashMap<>();
+        replacements.put(placeholder, replacement);
 
-            return text.toString();
+        return parseInputField(input, replacements);
+    }
+
+    private String parseInputField(String input, Map<String, String> replacements) {
+        if (input != null && input.length() > 0) {
+            StrSubstitutor substitutor = new StrSubstitutor(replacements);
+            String output = substitutor.replace(input);
+
+            checkForRemainingPlaceholders(output);
+
+            return output;
         }
 
         return input;
     }
 
-    protected void replace(StringBuilder text, String placeholder, String replacement) {
-        if (text != null && placeholder != null) {
-            String interpolatedPlaceholder = "{{" + placeholder + "}}";
-
-            int begin = 0;
-            while (begin < text.length()) {
-                int indexOf = text.indexOf(interpolatedPlaceholder, begin);
-                if (indexOf >= 0) {
-                    int end = indexOf + interpolatedPlaceholder.length();
-                    text.replace(indexOf, end, replacement != null ? replacement : "");
-                    begin = end;
-                } else {
-                    begin = text.length();
+    private void checkForRemainingPlaceholders(String output) {
+        List<String> remainingPlaceHolders = new ArrayList<>();
+        Matcher matcher = placeholderPattern.matcher(output);
+        while (matcher.find()) {
+            for (int i = 0; i <= matcher.groupCount(); i++) {
+                if (i > 0) {
+                    remainingPlaceHolders.add(matcher.group(i));
                 }
             }
+        }
+
+        if (!remainingPlaceHolders.isEmpty()) {
+            throw new ReplacementsMissingException(remainingPlaceHolders.toString());
         }
     }
 }

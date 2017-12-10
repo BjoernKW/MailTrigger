@@ -39,8 +39,8 @@ public class MailSender {
 
         Transport transport = null;
         try {
-            Session session = Session.getDefaultInstance(this.createProperties(this.mailTriggerConfig));
-            MimeMessage message = this.createMessage(session, mail);
+            Session session = Session.getDefaultInstance(createProperties(mailTriggerConfig));
+            MimeMessage message = createMessage(session, mail);
             logger.info("Mail subject: {}", mail.getSubject());
             logger.info("Mail sender: {}", mail.getFrom());
 
@@ -52,10 +52,10 @@ public class MailSender {
 
             transport = session.getTransport("smtp");
             transport.connect(
-                    this.mailTriggerConfig.getHost(),
-                    this.mailTriggerConfig.getPort(),
-                    this.mailTriggerConfig.getUsername(),
-                    this.mailTriggerConfig.getPassword()
+                    mailTriggerConfig.getHost(),
+                    mailTriggerConfig.getPort(),
+                    mailTriggerConfig.getUsername(),
+                    mailTriggerConfig.getPassword()
             );
             transport.sendMessage(message, message.getAllRecipients());
         } catch (Exception e) {
@@ -78,11 +78,11 @@ public class MailSender {
         message.setFrom(new InternetAddress(mailTemplate.getFrom()));
 
         try {
-            this.addRecipients(message, mailTemplate.getTo(), Message.RecipientType.TO);
-            this.addRecipients(message, mailTemplate.getCc(), Message.RecipientType.CC);
-            this.addRecipients(message, mailTemplate.getBcc(), Message.RecipientType.BCC);
+            addRecipients(message, mailTemplate.getTo(), Message.RecipientType.TO);
+            addRecipients(message, mailTemplate.getCc(), Message.RecipientType.CC);
+            addRecipients(message, mailTemplate.getBcc(), Message.RecipientType.BCC);
             message.setSubject(mailTemplate.getSubject());
-            message.setContent(this.createMultipart(mailTemplate.getTextAsString(), mailTemplate.getFormat()));
+            message.setContent(createMultipart(mailTemplate.getTextAsString(), mailTemplate.getFormat()));
         } catch (Exception e) {
             throw new MailException();
         }
@@ -105,7 +105,7 @@ public class MailSender {
         Multipart multipart = new MimeMultipart();
         MimeBodyPart messageBodyPart = new MimeBodyPart();
         multipart.addBodyPart(messageBodyPart);
-        messageBodyPart.setText(this.mailRenderer.render(content, format), StandardCharsets.UTF_8.name(), format);
+        messageBodyPart.setText(mailRenderer.render(content, format), StandardCharsets.UTF_8.name(), format);
 
         return multipart;
     }

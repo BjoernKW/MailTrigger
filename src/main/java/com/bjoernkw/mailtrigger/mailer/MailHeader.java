@@ -2,37 +2,57 @@ package com.bjoernkw.mailtrigger.mailer;
 
 public class MailHeader {
 
-    String recipient;
-    String from;
-    String cc;
-    String bcc;
-    String subject;
+    private String from;
+    private String to;
+    private String cc;
+    private String bcc;
+    private String subject;
 
-    MailHeader(String recipient) {
-        this.recipient = recipient;
+    public String getFrom() {
+        return from;
     }
 
-    public MailHeader from(String from) {
+    public void setFrom(String from) {
         this.from = from;
-
-        return this;
     }
 
-    public MailHeader cc(String cc) {
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
         this.cc = cc;
-
-        return this;
     }
 
-    public MailHeader bcc(String bcc) {
+    public String getBcc() {
+        return bcc;
+    }
+
+    public void setBcc(String bcc) {
         this.bcc = bcc;
-
-        return this;
     }
 
-    public MailHeader subject(String subject) {
-        this.subject = subject;
+    public String getSubject() {
+        return subject;
+    }
 
-        return this;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "MailHeader[from=%s, to=%s, cc=%s, bcc=%s, subject=%s]",
+                from, to, cc, bcc, subject
+        );
     }
 }
