@@ -49,11 +49,6 @@
             <artifactId>commonmark</artifactId>
             <version>0.10.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.mnode.ical4j</groupId>
-            <artifactId>ical4j</artifactId>
-            <version>2.1.5</version>
-        </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
