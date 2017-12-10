@@ -27,16 +27,12 @@ public class MailerTests {
     @Test
     public void sendMail() throws Error {
         URL templateUrl = MailTriggerApplication.class.getResource("test_channel.md");
-        MailHeader mailHeader = new MailHeader();
-        mailHeader.setTo("bjoern@bjoernkw.com");
-        mailHeader.setFrom("bjoern@bjoernkw.com");
-
         Map<String, String> replacements = new HashMap<>();
         replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
         try {
-            mailer.send(mailHeader, templateUrl, replacements);
+            mailer.send(templateUrl, replacements);
         } catch (Exception e) {
             logger.error("{}", e);
             assertTrue(false);

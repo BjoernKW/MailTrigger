@@ -39,7 +39,7 @@ public class MailSender {
 
         Transport transport = null;
         try {
-            Session session = Session.getDefaultInstance(createProperties(mailTriggerConfig));
+            Session session = Session.getDefaultInstance(createSessionPropertiesFromConfig(mailTriggerConfig));
             MimeMessage message = createMessage(session, mail);
             logger.info("Mail subject: {}", mail.getSubject());
             logger.info("Mail sender: {}", mail.getFrom());
@@ -110,7 +110,7 @@ public class MailSender {
         return multipart;
     }
 
-    private Properties createProperties(MailTriggerConfig mailTransferConfig) {
+    private Properties createSessionPropertiesFromConfig(MailTriggerConfig mailTransferConfig) {
         requireNonNull(mailTransferConfig);
 
         Properties properties = new Properties();
