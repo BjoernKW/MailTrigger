@@ -7,10 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
@@ -81,8 +78,15 @@ public class MailSender {
             addRecipients(message, mailTemplate.getTo(), Message.RecipientType.TO);
             addRecipients(message, mailTemplate.getCc(), Message.RecipientType.CC);
             addRecipients(message, mailTemplate.getBcc(), Message.RecipientType.BCC);
+
             message.setSubject(mailTemplate.getSubject());
-            message.setContent(createMultipart(mailTemplate.getTextAsString(), mailTemplate.getFormat()));
+            message.setContent(
+                    createMultipart(
+                            mailTemplate.getBodyTextAsString(),
+                            mailTemplate.getAttachmentAsString(),
+                            mailTemplate.getFormat()
+                    )
+            );
         } catch (Exception e) {
             throw new MailException();
         }
@@ -101,11 +105,22 @@ public class MailSender {
         }
     }
 
-    private Multipart createMultipart(String content, String format) throws MessagingException {
+    private Multipart createMultipart(
+            String content,
+            String attachment,
+            String format
+    ) throws MessagingException {
         Multipart multipart = new MimeMultipart();
+
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        multipart.addBodyPart(messageBodyPart);
         messageBodyPart.setText(mailRenderer.render(content, format), StandardCharsets.UTF_8.name(), format);
+        multipart.addBodyPart(messageBodyPart);
+
+        if (attachment != null) {
+            MimeBodyPart fileBodyPart = new PreencodedMimeBodyPart("base64");
+            fileBodyPart.setText(attachment);
+            multipart.addBodyPart(fileBodyPart);
+        }
 
         return multipart;
     }

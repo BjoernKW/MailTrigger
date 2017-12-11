@@ -32,7 +32,7 @@ public class PlaceholderProcessor {
         mailTemplate.setBcc(parseInputField(mailTemplate.getBcc(), replacements));
         mailTemplate.setSubject(parseInputField(mailTemplate.getSubject(), replacements));
 
-        String text = parseInputField(mailTemplate.getTextAsString(), replacements);
+        String text = parseInputField(mailTemplate.getBodyTextAsString(), replacements);
 
         mailTemplate.clearBodyText();
         mailTemplate.appendTextToBody(text);

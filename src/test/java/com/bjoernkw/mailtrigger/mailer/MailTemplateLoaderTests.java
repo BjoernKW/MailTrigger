@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MailTemplateLoaderTests {
 
@@ -22,11 +21,12 @@ public class MailTemplateLoaderTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
-        assertTrue(mailTemplate.getTextAsString() != null && mailTemplate.getTextAsString().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
 
         assertEquals("Test email sent by MailTrigger", mailTemplate.getSubject());
 
         assertTrue(mailTemplate.getFormat() != null && mailTemplate.getFormat().equals("html"));
+        assertEquals(0, mailTemplate.getAttachmentLength());
     }
 
     @Test
@@ -37,10 +37,24 @@ public class MailTemplateLoaderTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
-        assertTrue(mailTemplate.getTextAsString() != null && mailTemplate.getTextAsString().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
 
         assertEquals("Test email with text format sent by MailTrigger", mailTemplate.getSubject());
 
         assertTrue(mailTemplate.getFormat() != null && mailTemplate.getFormat().equals("text"));
+    }
+
+    @Test
+    public void loadMailTemplateWithAttachment() {
+        MailTemplateLoader mailTemplateLoader = new MailTemplateLoader();
+
+        URL resource = MailTriggerApplication.class.getResource("attachment_test_channel.md");
+        MailTemplate mailTemplate = mailTemplateLoader.load(resource);
+
+        assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
+
+        assertEquals("Test email with text format sent by MailTrigger", mailTemplate.getSubject());
+        assertNotEquals(0, mailTemplate.getAttachmentLength());
     }
 }

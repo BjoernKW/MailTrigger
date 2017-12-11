@@ -18,19 +18,25 @@ class MailTemplateLoader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String separator = "+++";
+    private String bodyTextSeparator = "+++BODY_TEXT+++";
+
+    private String attachmentSeparator = "+++ATTACHMENT+++";
 
     public MailTemplate load(URL url) {
-        boolean readingText = false;
         MailTemplate mailTemplate = new MailTemplate();
         BufferedReader reader = null;
 
         try (InputStream inputStream = url.openStream()) {
             reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8.name()));
+
+            boolean isReadingBodyText = false;
+            boolean isReadingAttachment = false;
             String line;
             while ((line = reader.readLine()) != null) {
-                readingText = isReadingText(readingText, line);
-                readTemplate(line, readingText, mailTemplate);
+                isReadingBodyText = isReadingSection(isReadingBodyText, bodyTextSeparator, line);
+                isReadingAttachment = isReadingSection(isReadingBodyText, attachmentSeparator, line);
+
+                readTemplate(line, isReadingBodyText, isReadingAttachment, mailTemplate);
             }
 
             return mailTemplate;
@@ -47,34 +53,42 @@ class MailTemplateLoader {
         }
     }
 
-    private void readTemplate(String line, boolean readingText, MailTemplate mailTemplate) {
+    private void readTemplate(
+            String line,
+            boolean isReadingBodyText,
+            boolean isReadingAttachment,
+            MailTemplate mailTemplate
+    ) {
         if (line != null) {
             String processedLine = line.trim();
 
-            if (processedLine.startsWith(this.separator)) {
+            if (processedLine.startsWith(this.bodyTextSeparator)) {
                 return;
             }
 
-            if (readingText) {
-                if (mailTemplate.getTextLength() > 0 && mailTemplate.getFormat().equals("html")) {
+            if (isReadingBodyText) {
+                if (mailTemplate.getBodyTextLength() > 0 && mailTemplate.getFormat().equals("html")) {
                     processedLine = "<br>" + processedLine;
                 }
                 mailTemplate.appendTextToBody(processedLine);
             } else {
+                if (isReadingAttachment) {
+                    mailTemplate.appendToAttachment(processedLine);
+                }
                 setMailProperty(mailTemplate, processedLine);
             }
         }
     }
 
-    private boolean isReadingText(boolean readingText, String line) {
+    private boolean isReadingSection(boolean isReadingSection, String separator, String line) {
         if (line != null) {
             String processedLine = line.trim();
-            if (processedLine.startsWith(this.separator)) {
+            if (processedLine.startsWith(separator)) {
                 return true;
             }
         }
 
-        return readingText;
+        return isReadingSection;
     }
 
     private void setMailProperty(MailTemplate mailTemplate, String line) {

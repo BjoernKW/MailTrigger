@@ -9,6 +9,8 @@ public class MailTemplate {
     private String subject;
     private String format = "html";
 
+    private StringBuilder attachment = new StringBuilder();
+
     private StringBuilder bodyText = new StringBuilder();
 
     public String getFrom() {
@@ -63,19 +65,38 @@ public class MailTemplate {
         this.bodyText = new StringBuilder();
     }
 
-    public void appendTextToBody(String textLine) {
+    public void appendTextToBody(String line) {
         if (this.bodyText.length() > 0) {
             this.bodyText.append("\n");
         }
-        this.bodyText.append(textLine);
+        this.bodyText.append(line);
     }
 
-    public int getTextLength() {
+    public int getBodyTextLength() {
         return this.bodyText.length();
     }
 
-    public String getTextAsString() {
+    public String getBodyTextAsString() {
         return this.bodyText.toString();
+    }
+
+    public void clearAttachment() {
+        this.attachment = new StringBuilder();
+    }
+
+    public void appendToAttachment(String line) {
+        if (this.attachment.length() > 0) {
+            this.attachment.append("\n");
+        }
+        this.bodyText.append(line);
+    }
+
+    public int getAttachmentLength() {
+        return this.attachment.length();
+    }
+
+    public String getAttachmentAsString() {
+        return this.attachment.toString();
     }
 
     @Override
