@@ -9,9 +9,9 @@ public class MailTemplate {
     private String subject;
     private String format = "html";
 
-    private StringBuilder attachment = new StringBuilder();
-
     private StringBuilder bodyText = new StringBuilder();
+
+    private StringBuilder attachment = new StringBuilder();
 
     public String getFrom() {
         return this.from;
@@ -88,7 +88,7 @@ public class MailTemplate {
         if (this.attachment.length() > 0) {
             this.attachment.append("\n");
         }
-        this.bodyText.append(line);
+        this.attachment.append(line);
     }
 
     public int getAttachmentLength() {
