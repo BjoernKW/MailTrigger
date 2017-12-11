@@ -19,7 +19,6 @@ class MailTemplateLoader {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String bodyTextSeparator = "+++BODY_TEXT+++";
-
     private String attachmentSeparator = "+++ATTACHMENT+++";
 
     public MailTemplate load(URL url) {
@@ -31,10 +30,11 @@ class MailTemplateLoader {
 
             boolean isReadingBodyText = false;
             boolean isReadingAttachment = false;
+
             String line;
             while ((line = reader.readLine()) != null) {
                 isReadingBodyText = isReadingSection(isReadingBodyText, bodyTextSeparator, line);
-                isReadingAttachment = isReadingSection(isReadingBodyText, attachmentSeparator, line);
+                isReadingAttachment = isReadingSection(isReadingAttachment, attachmentSeparator, line);
 
                 readTemplate(line, isReadingBodyText, isReadingAttachment, mailTemplate);
             }
@@ -62,7 +62,8 @@ class MailTemplateLoader {
         if (line != null) {
             String processedLine = line.trim();
 
-            if (processedLine.startsWith(this.bodyTextSeparator)) {
+            if (processedLine.startsWith(this.bodyTextSeparator)
+                    || processedLine.startsWith(this.attachmentSeparator)) {
                 return;
             }
 

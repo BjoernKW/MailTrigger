@@ -21,7 +21,8 @@ public class MailTemplateLoaderTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
-        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null
+                && mailTemplate.getBodyTextAsString().length() > 0);
 
         assertEquals("Test email sent by MailTrigger", mailTemplate.getSubject());
 
@@ -37,7 +38,8 @@ public class MailTemplateLoaderTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
-        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null
+                && mailTemplate.getBodyTextAsString().length() > 0);
 
         assertEquals("Test email with text format sent by MailTrigger", mailTemplate.getSubject());
 
@@ -52,7 +54,8 @@ public class MailTemplateLoaderTests {
         MailTemplate mailTemplate = mailTemplateLoader.load(resource);
 
         assertTrue(mailTemplate.getSubject() != null && mailTemplate.getSubject().length() > 0);
-        assertTrue(mailTemplate.getBodyTextAsString() != null && mailTemplate.getBodyTextAsString().length() > 0);
+        assertTrue(mailTemplate.getBodyTextAsString() != null
+                && mailTemplate.getBodyTextAsString().length() > 0);
 
         assertEquals("Test email with text format sent by MailTrigger", mailTemplate.getSubject());
         assertNotEquals(0, mailTemplate.getAttachmentLength());
