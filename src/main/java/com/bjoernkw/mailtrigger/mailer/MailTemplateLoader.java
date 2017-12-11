@@ -59,25 +59,28 @@ class MailTemplateLoader {
             boolean isReadingAttachment,
             MailTemplate mailTemplate
     ) {
-        if (line != null) {
-            String processedLine = line.trim();
+        if (line == null) {
+            return;
+        }
 
-            if (processedLine.startsWith(this.bodyTextSeparator)
-                    || processedLine.startsWith(this.attachmentSeparator)) {
-                return;
-            }
+        String processedLine = line.trim();
 
-            if (isReadingBodyText) {
-                if (mailTemplate.getBodyTextLength() > 0 && mailTemplate.getFormat().equals("html")) {
-                    processedLine = "<br>" + processedLine;
-                }
-                mailTemplate.appendTextToBody(processedLine);
-            } else {
-                if (isReadingAttachment) {
-                    mailTemplate.appendToAttachment(processedLine);
-                }
-                setMailProperty(mailTemplate, processedLine);
+        if (processedLine.startsWith(this.bodyTextSeparator)
+                || processedLine.startsWith(this.attachmentSeparator)) {
+            return;
+        }
+
+        if (isReadingBodyText && !isReadingAttachment) {
+            if (mailTemplate.getBodyTextLength() > 0 && mailTemplate.getFormat().equals("html")) {
+                processedLine = "<br>" + processedLine;
             }
+            mailTemplate.appendTextToBody(processedLine);
+        }
+        if (isReadingAttachment && !isReadingBodyText) {
+            mailTemplate.appendToAttachment(processedLine);
+        }
+        if (isNeitherReadingBodyNorAttachement(isReadingBodyText, isReadingAttachment)) {
+            setMailProperty(mailTemplate, processedLine);
         }
     }
 
@@ -90,6 +93,10 @@ class MailTemplateLoader {
         }
 
         return isReadingSection;
+    }
+
+    private boolean isNeitherReadingBodyNorAttachement(boolean isReadingBodyText, boolean isReadingAttachment) {
+        return !(isReadingBodyText || isReadingAttachment);
     }
 
     private void setMailProperty(MailTemplate mailTemplate, String line) {
