@@ -32,10 +32,13 @@ public class PlaceholderProcessor {
         mailTemplate.setBcc(parseInputField(mailTemplate.getBcc(), replacements));
         mailTemplate.setSubject(parseInputField(mailTemplate.getSubject(), replacements));
 
-        String text = parseInputField(mailTemplate.getBodyTextAsString(), replacements);
-
+        String bodyText = parseInputField(mailTemplate.getBodyTextAsString(), replacements);
         mailTemplate.clearBodyText();
-        mailTemplate.appendTextToBody(text);
+        mailTemplate.appendTextToBody(bodyText);
+
+        String attachment = parseInputField(mailTemplate.getAttachmentAsString(), replacements);
+        mailTemplate.clearAttachment();
+        mailTemplate.appendToAttachment(attachment);
     }
 
     protected String parseInputField(String input, String placeholder, String replacement) {

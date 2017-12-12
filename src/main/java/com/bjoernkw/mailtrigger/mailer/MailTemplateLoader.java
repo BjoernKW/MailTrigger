@@ -36,6 +36,8 @@ class MailTemplateLoader {
                 isReadingBodyText = isReadingSection(isReadingBodyText, bodyTextSeparator, line);
                 isReadingAttachment = isReadingSection(isReadingAttachment, attachmentSeparator, line);
 
+                isReadingBodyText &= !isReadingAttachment;
+
                 readTemplate(line, isReadingBodyText, isReadingAttachment, mailTemplate);
             }
 

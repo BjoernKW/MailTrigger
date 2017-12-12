@@ -57,7 +57,7 @@ public class MailTemplateLoaderTests {
         assertTrue(mailTemplate.getBodyTextAsString() != null
                 && mailTemplate.getBodyTextAsString().length() > 0);
 
-        assertEquals("Test email with text format sent by MailTrigger", mailTemplate.getSubject());
+        assertEquals("Test email with attachment sent by MailTrigger", mailTemplate.getSubject());
         assertNotEquals(0, mailTemplate.getAttachmentLength());
     }
 }

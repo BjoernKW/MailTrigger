@@ -1,6 +1,6 @@
 from: bjoern@bjoernkw.com
 to: ${TO}
-subject: Test email with text format sent by MailTrigger
+subject: Test email with attachment sent by MailTrigger
 +++BODY_TEXT+++
 Dear ${FIRST_NAME},
 
