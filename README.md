@@ -4,7 +4,7 @@ MailTrigger is a service that allows you to asynchronously send emails using an 
 channels and generated from Markdown templates which are kept in the same source code repository as the software itself.
 
 Hence, the email templates can be managed using [GitHub](https://github.com/) / [GitLab](https://about.gitlab.com/)
-(or the like) [Markdown](https://daringfireball.net/projects/markdown/) editors.
+(or the like) in-browser [Markdown](https://daringfireball.net/projects/markdown/) editors.
 
 ## Getting Started
 
