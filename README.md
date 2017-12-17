@@ -10,9 +10,8 @@ Hence, the email templates can be managed using [GitHub](https://github.com/) / 
 
 ### Prerequisites
 
-* [Java 9](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
+* [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven](https://maven.apache.org/)
-* a servlet container such as [Apache Tomcat](https://tomcat.apache.org/) or [Jetty](https://www.eclipse.org/jetty/)
 
 ### Running the app in dev mode
 
@@ -24,14 +23,15 @@ Run ```mvn clean install``` from the command line.
 
 ## Deployment
 
-The application can be deployed as a standard WAR file in any servlet container. Please follow these steps:
+You can run the application by using the standard Spring Boot deployment mechanism (see these three articles for more
+information on Spring Boot deployment techniques and alternatives:
+[Deploying Spring Boot Applications](https://spring.io/blog/2014/03/07/deploying-spring-boot-applications),
+[Running your application](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html),
+[Installing Spring Boot applications](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html)):
 
-1. Run ```mvn clean install``` from the command line.
-2. Copy the generated WAR file (e.g. ```mailTrigger-0.0.x-SNAPSHOT.war```) from the ```target```
-folder in the project directory to the ```webapps``` directory of your servlet container.
-3. *Optional*: Restart your servlet container.
-4. The application should be available under ```http://HOST:PORT/NAME_OF_THE_WAR_FILE```,
-e.g. ```http://localhost:8080/mailTrigger-0.0.x-SNAPSHOT```
+```java -jar target/mailtrigger-0.0.1-SNAPSHOT.jar```
+
+The application then should be available under [http://localhost:8080](http://localhost:8080)
 
 ## Configuration
 
@@ -51,8 +51,8 @@ provider in the HTTP request body:
 
 ## REST API Documentation
 
-Once the app is started the REST API documentation is be available under ```/swagger-ui.html```, e.g.
-```http://localhost:8080/mailTrigger-0.0.x-SNAPSHOT/swagger-ui.html```
+Once the app is started the REST API documentation will be available under
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ## Built With
 
