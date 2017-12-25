@@ -3,7 +3,7 @@
 MailTrigger is a service that allows you to asynchronously send emails using an HTTP API. Emails are represented as
 channels and generated from Markdown templates which are kept in the same source code repository as the software itself.
 
-Hence, the email templates can be managed using [GitHub](https://github.com/) / [GitLab](https://about.gitlab.com/)
+Hence, email templates can be managed using [GitHub](https://github.com/) / [GitLab](https://about.gitlab.com/)
 (or the like) in-browser [Markdown](https://daringfireball.net/projects/markdown/) editors.
 
 ## Getting Started
@@ -45,7 +45,7 @@ These environment variables are required for running MailTrigger:
 ## Sending an email
 
 This HTTP call will load a template named ```test_channel.md``` and replace any placeholders with the replacements
-provider in the HTTP request body:
+provided in the HTTP request body:
 
 ```curl -d '{"TO": "test@test.com", "FIRST_NAME": "Jack"}' -H 'Content-Type: application/json' -X POST http://localhost:8080/api/v1/sendMail/test_channel```
 
