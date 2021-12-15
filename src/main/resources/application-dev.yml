@@ -1,0 +1,6 @@
+spring:
+  thymeleaf:
+    cache: false
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true

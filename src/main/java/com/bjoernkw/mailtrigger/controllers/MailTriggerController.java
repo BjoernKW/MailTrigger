@@ -21,17 +21,14 @@ public class MailTriggerController {
         this.mailer = mailer;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String start(Model model) {
         model.addAttribute("year", LocalDate.now().getYear());
 
         return "index";
     }
 
-    @RequestMapping(
-            value = "/api/v1/sendMail/{channel}",
-            method = RequestMethod.POST
-    )
+    @PostMapping(value = "/api/v1/sendMail/{channel}")
     @ResponseBody
     public Message sendMail(
             @PathVariable String channel,

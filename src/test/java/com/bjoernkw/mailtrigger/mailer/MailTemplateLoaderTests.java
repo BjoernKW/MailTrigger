@@ -1,20 +1,20 @@
 package com.bjoernkw.mailtrigger.mailer;
 
 import com.bjoernkw.mailtrigger.MailTriggerApplication;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class MailTemplateLoaderTests {
+class MailTemplateLoaderTests {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
-    public void loadMailTemplate() {
+    void loadMailTemplate() {
         MailTemplateLoader mailTemplateLoader = new MailTemplateLoader();
 
         URL resource = MailTriggerApplication.class.getResource("test_channel.md");
@@ -31,7 +31,7 @@ public class MailTemplateLoaderTests {
     }
 
     @Test
-    public void loadTextMailTemplate() {
+    void loadTextMailTemplate() {
         MailTemplateLoader mailTemplateLoader = new MailTemplateLoader();
 
         URL resource = MailTriggerApplication.class.getResource("text_test_channel.md");
@@ -47,7 +47,7 @@ public class MailTemplateLoaderTests {
     }
 
     @Test
-    public void loadMailTemplateWithAttachment() {
+    void loadMailTemplateWithAttachment() {
         MailTemplateLoader mailTemplateLoader = new MailTemplateLoader();
 
         URL resource = MailTriggerApplication.class.getResource("attachment_test_channel.md");

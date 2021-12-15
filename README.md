@@ -10,7 +10,7 @@ Hence, email templates can be managed using [GitHub](https://github.com/) / [Git
 
 ### Prerequisites
 
-* [Java 1.8 or higher](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Java 11](https://openjdk.java.net/projects/jdk/11/)
 * [Maven](https://maven.apache.org/)
 
 ### Running the app in dev mode

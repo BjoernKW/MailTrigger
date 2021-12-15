@@ -18,9 +18,9 @@ public class MailSender {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private MailTriggerConfig mailTriggerConfig;
+    private final MailTriggerConfig mailTriggerConfig;
 
-    private MailRenderer mailRenderer;
+    private final MailRenderer mailRenderer;
 
     public MailSender(
             MailTriggerConfig mailTriggerConfig,
@@ -56,14 +56,14 @@ public class MailSender {
             );
             transport.sendMessage(message, message.getAllRecipients());
         } catch (Exception e) {
-            logger.error("Error on sending mail: {}", e);
+            logger.error("Error on sending mail: {}", e.getMessage());
         } finally {
             try {
                 if (transport != null) {
                     transport.close();
                 }
             } catch (MessagingException e) {
-                logger.error("Problem while closing transport: {}", e);
+                logger.error("Problem while closing transport: {}", e.getMessage());
             }
         }
 

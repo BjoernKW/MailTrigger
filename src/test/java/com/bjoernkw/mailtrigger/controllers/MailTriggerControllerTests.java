@@ -1,11 +1,9 @@
 package com.bjoernkw.mailtrigger.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,20 +12,19 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class MailTriggerControllerTests {
+class MailTriggerControllerTests {
 
     @Autowired
     private MailTriggerController mailTriggerController;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         standaloneSetup(mailTriggerController);
     }
 
     @Test
-    public void testSendMail() {
+    void testSendMail() {
         Map<String, String> replacements = new HashMap<>();
 
         given()

@@ -1,0 +1,5 @@
+mailTrigger:
+  host: ${SMTP_HOST:default}
+  port: ${SMTP_PORT:587}
+  username: ${SMTP_USERNAME:default}
+  password: ${SMTP_PASSWORD:default}

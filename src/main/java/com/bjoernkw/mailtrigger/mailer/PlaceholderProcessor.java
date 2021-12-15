@@ -1,7 +1,7 @@
 package com.bjoernkw.mailtrigger.mailer;
 
 import com.bjoernkw.mailtrigger.exceptions.ReplacementsMissingException;
-import org.apache.commons.text.StrSubstitutor;
+import org.apache.commons.text.StringSubstitutor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 @Service
 public class PlaceholderProcessor {
 
-    private Pattern placeholderPattern;
+    private final Pattern placeholderPattern;
 
     public PlaceholderProcessor() {
         placeholderPattern = Pattern.compile("(\\$\\{.+})");
@@ -50,7 +50,7 @@ public class PlaceholderProcessor {
 
     private String parseInputField(String input, Map<String, String> replacements) {
         if (input != null && input.length() > 0) {
-            StrSubstitutor substitutor = new StrSubstitutor(replacements);
+            StringSubstitutor substitutor = new StringSubstitutor(replacements);
             String output = substitutor.replace(input);
 
             checkForRemainingPlaceholders(output);

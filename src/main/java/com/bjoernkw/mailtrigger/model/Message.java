@@ -1,6 +1,7 @@
 package com.bjoernkw.mailtrigger.model;
 
 public class Message {
+
     private String text;
 
     public String getText() {

@@ -18,8 +18,8 @@ class MailTemplateLoader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String bodyTextSeparator = "+++BODY_TEXT+++";
-    private String attachmentSeparator = "+++ATTACHMENT+++";
+    private static final String BODY_TEXT_SEPARATOR = "+++BODY_TEXT+++";
+    private static final String ATTACHMENT_SEPARATOR = "+++ATTACHMENT+++";
 
     public MailTemplate load(URL url) {
         MailTemplate mailTemplate = new MailTemplate();
@@ -33,8 +33,8 @@ class MailTemplateLoader {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                isReadingBodyText = isReadingSection(isReadingBodyText, bodyTextSeparator, line);
-                isReadingAttachment = isReadingSection(isReadingAttachment, attachmentSeparator, line);
+                isReadingBodyText = isReadingSection(isReadingBodyText, BODY_TEXT_SEPARATOR, line);
+                isReadingAttachment = isReadingSection(isReadingAttachment, ATTACHMENT_SEPARATOR, line);
 
                 isReadingBodyText &= !isReadingAttachment;
 
@@ -50,7 +50,7 @@ class MailTemplateLoader {
                     reader.close();
                 }
             } catch (IOException e) {
-                logger.error("{}", e);
+                logger.error("{}", e.getMessage());
             }
         }
     }
@@ -67,8 +67,8 @@ class MailTemplateLoader {
 
         String processedLine = line.trim();
 
-        if (processedLine.startsWith(this.bodyTextSeparator)
-                || processedLine.startsWith(this.attachmentSeparator)) {
+        if (processedLine.startsWith(BODY_TEXT_SEPARATOR)
+                || processedLine.startsWith(ATTACHMENT_SEPARATOR)) {
             return;
         }
 
@@ -111,7 +111,7 @@ class MailTemplateLoader {
             field.setAccessible(true);
             field.set(mailTemplate, propertyValue);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            logger.error("{}", e);
+            logger.error("{}", e.getMessage());
         } finally {
             if (field != null) {
                 field.setAccessible(false);
