@@ -32,9 +32,7 @@ class PlaceholderProcessorTests {
         String beginning = "Test";
         String placeholder = "REPLACEMENT";
 
-        assertThrows(ReplacementsMissingException.class, () -> {
-            placeholderProcessor.parseInputField(beginning + "${REPLACEMENT}", placeholder, null);
-        });
+        assertThrows(ReplacementsMissingException.class, () -> placeholderProcessor.parseInputField(beginning + "${REPLACEMENT}", placeholder, null));
     }
 
     @Test
@@ -63,8 +61,6 @@ class PlaceholderProcessorTests {
 
         PlaceholderProcessor placeholderProcessor = new PlaceholderProcessor();
 
-        assertThrows(ReplacementsMissingException.class, () -> {
-            placeholderProcessor.parseMailTemplate(mailTemplate, replacements);
-        });
+        assertThrows(ReplacementsMissingException.class, () -> placeholderProcessor.parseMailTemplate(mailTemplate, replacements));
     }
 }

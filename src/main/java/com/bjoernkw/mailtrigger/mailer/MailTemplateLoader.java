@@ -16,10 +16,9 @@ import java.nio.charset.StandardCharsets;
 @Service
 class MailTemplateLoader {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private static final String BODY_TEXT_SEPARATOR = "+++BODY_TEXT+++";
     private static final String ATTACHMENT_SEPARATOR = "+++ATTACHMENT+++";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public MailTemplate load(URL url) {
         MailTemplate mailTemplate = new MailTemplate();
