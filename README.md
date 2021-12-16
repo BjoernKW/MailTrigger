@@ -1,5 +1,8 @@
 # MailTrigger
 
+[![CircleCI](https://circleci.com/gh/BjoernKW/MailTrigger.svg?style=shield)](https://circleci.com/gh/BjoernKW/MailTrigger)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 MailTrigger is a service that allows you to asynchronously send emails using an HTTP API. Emails are represented as
 channels and generated from Markdown templates which are kept in the same source code repository as the software itself.
 
