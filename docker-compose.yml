@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  mailtrigger:
+    image: bjoernkw/mailtrigger
+    ports:
+      - 8080:8080
+    volumes:
+      - "./mail-templates:/mail-templates" # Configure a custom template directory here.
+    hostname: mailtrigger

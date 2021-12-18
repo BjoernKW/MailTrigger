@@ -6,13 +6,15 @@ import java.net.URL;
 import java.util.Map;
 
 @Service
-public class Mailer {
+public class MailService {
 
     private final MailSender mailSender;
+
     private final MailTemplateLoader mailTemplateLoader;
+
     private final PlaceholderProcessor placeholderProcessor;
 
-    public Mailer(
+    public MailService(
             MailSender mailSender,
             MailTemplateLoader mailTemplateLoader,
             PlaceholderProcessor placeholderProcessor

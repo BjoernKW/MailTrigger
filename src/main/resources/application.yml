@@ -3,3 +3,4 @@ mailTrigger:
   port: ${SMTP_PORT:587}
   username: ${SMTP_USERNAME:default}
   password: ${SMTP_PASSWORD:default}
+  mail-template-directory: mail-templates

@@ -9,6 +9,8 @@ channels and generated from Markdown templates which are kept in the same source
 Hence, email templates can be managed using [GitHub](https://github.com/) / [GitLab](https://about.gitlab.com/)
 (or the like) in-browser [Markdown](https://daringfireball.net/projects/markdown/) editors.
 
+Alternatively, you can configure a custom template directory for loading email templates from the filesystem.
+
 ## Getting Started
 
 ### Prerequisites
@@ -29,12 +31,28 @@ Run ```mvn clean install``` from the command line.
 You can run the application by using the standard Spring Boot deployment mechanism (see these three articles for more
 information on Spring Boot deployment techniques and alternatives:
 [Deploying Spring Boot Applications](https://spring.io/blog/2014/03/07/deploying-spring-boot-applications),
-[Running your application](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html),
+[Running your application](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html)
+,
 [Installing Spring Boot applications](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html)):
 
-```java -jar target/mailtrigger-0.0.1-SNAPSHOT.jar```
+```java -jar target/mailtrigger-0.0.2-SNAPSHOT.jar```
 
 The application then should be available under [http://localhost:8080](http://localhost:8080)
+
+### Via Docker
+
+Alternatively, you can run the application via Docker
+(using [the official MailTrigger Docker image](https://hub.docker.com/repository/docker/bjoernkw/mailtrigger):
+
+```docker run -p 8080:8080 bjoernkw/mailtrigger```
+
+In the project root folder, there's an example `Dockerfile` that can be used to build the image, as well as a sample
+`docker-compose.yml` with an example configuration. The latter can be used to run the application via the usual Docker
+Compose command:
+
+```docker-compose up```
+
+That sample `docker-compose.yml` configures a custom template directory.
 
 ## Configuration
 

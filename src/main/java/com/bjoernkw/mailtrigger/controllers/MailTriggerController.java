@@ -2,7 +2,8 @@ package com.bjoernkw.mailtrigger.controllers;
 
 import com.bjoernkw.mailtrigger.MailTriggerApplication;
 import com.bjoernkw.mailtrigger.exceptions.ChannelNotFoundException;
-import com.bjoernkw.mailtrigger.mailer.Mailer;
+import com.bjoernkw.mailtrigger.mailer.MailService;
+import com.bjoernkw.mailtrigger.mailer.MailTriggerConfig;
 import com.bjoernkw.mailtrigger.model.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,16 @@ import java.util.Map;
 @Controller
 public class MailTriggerController {
 
-    private final Mailer mailer;
+    private final MailService mailService;
 
-    public MailTriggerController(Mailer mailer) {
-        this.mailer = mailer;
+    private final MailTriggerConfig mailTriggerConfig;
+
+    public MailTriggerController(
+            MailService mailService,
+            MailTriggerConfig mailTriggerConfig
+    ) {
+        this.mailService = mailService;
+        this.mailTriggerConfig = mailTriggerConfig;
     }
 
     @GetMapping("/")
@@ -34,12 +41,22 @@ public class MailTriggerController {
             @PathVariable String channel,
             @RequestBody Map<String, String> replacements
     ) {
-        URL resourceURL = MailTriggerApplication.class.getResource(channel + ".md");
+        // First, try to load the template from the directory set in the application configuration.
+        URL resourceURL = getClass().getClassLoader().getResource(mailTriggerConfig.getMailTemplateDirectory() + "/" + channel + ".md");
+        if (resourceURL == null) {
+            // If no template with the requested channel name has been found in that directory, try to load the template
+            // from the classpath instead.
+            resourceURL = getClass().getClassLoader().getResource(channel + ".md");
+        }
+        if (resourceURL == null) {
+            // Finally, attempt to load the template relative to the application's package name
+            resourceURL = MailTriggerApplication.class.getResource(channel + ".md");
+        }
         if (resourceURL == null) {
             throw new ChannelNotFoundException();
         }
 
-        mailer.send(
+        mailService.send(
                 resourceURL,
                 replacements
         );

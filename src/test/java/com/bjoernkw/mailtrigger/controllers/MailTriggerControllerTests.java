@@ -51,6 +51,15 @@ class MailTriggerControllerTests {
                 .contentType("application/json;charset=UTF-8")
                 .body(replacements)
                 .when()
+                .post("/api/v1/sendMail/test_channel_with_custom_template")
+                .then()
+                .statusCode(200)
+                .body("text", equalTo("Email was sent."));
+
+        given()
+                .contentType("application/json;charset=UTF-8")
+                .body(replacements)
+                .when()
                 .post("/api/v1/sendMail/nonExistentChannel")
                 .then()
                 .statusCode(404);

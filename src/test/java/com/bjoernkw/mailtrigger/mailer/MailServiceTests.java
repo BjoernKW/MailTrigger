@@ -14,12 +14,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
-class MailerTests {
+class MailServiceTests {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private Mailer mailer;
+    private MailService mailService;
 
     @Test
     void sendMail() throws Error {
@@ -29,7 +29,7 @@ class MailerTests {
         replacements.put("FIRST_NAME", "John");
 
         try {
-            mailer.send(templateUrl, replacements);
+            mailService.send(templateUrl, replacements);
         } catch (Exception e) {
             logger.error("{}", e.getMessage());
             fail();

@@ -18,6 +18,9 @@ public class MailTriggerConfig {
     @Value("${mailTrigger.password}")
     private String password;
 
+    @Value("${mailTrigger.mail-template-directory}")
+    private String mailTemplateDirectory;
+
     public String getHost() {
         return host;
     }
@@ -50,11 +53,19 @@ public class MailTriggerConfig {
         this.password = password;
     }
 
+    public String getMailTemplateDirectory() {
+        return mailTemplateDirectory;
+    }
+
+    public void setMailTemplateDirectory(String mailTemplateDirectory) {
+        this.mailTemplateDirectory = mailTemplateDirectory;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "MailTriggerConfig[host=%s, port=%s, username=%s]",
-                host, port, username
+                "MailTriggerConfig[host=%s, port=%s, username=%s, mailTemplateDirectory=%s]",
+                host, port, username, mailTemplateDirectory
         );
     }
 }
