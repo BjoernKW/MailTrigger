@@ -62,7 +62,7 @@ public class MailTriggerController {
         );
 
         Message message = new Message();
-        message.setText("Email was sent.");
+        message.setText("Email has been sent.");
 
         return message;
     }

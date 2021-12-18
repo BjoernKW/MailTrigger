@@ -45,7 +45,7 @@ class MailTriggerControllerTests {
                 .post("/api/v1/sendMail/test_channel")
                 .then()
                 .statusCode(200)
-                .body("text", equalTo("Email was sent."));
+                .body("text", equalTo("Email has been sent."));
 
         given()
                 .contentType("application/json;charset=UTF-8")
@@ -54,7 +54,7 @@ class MailTriggerControllerTests {
                 .post("/api/v1/sendMail/test_channel_with_custom_template")
                 .then()
                 .statusCode(200)
-                .body("text", equalTo("Email was sent."));
+                .body("text", equalTo("Email has been sent."));
 
         given()
                 .contentType("application/json;charset=UTF-8")
