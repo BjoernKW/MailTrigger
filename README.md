@@ -42,7 +42,7 @@ The application then should be available under [http://localhost:8080](http://lo
 ### Via Docker
 
 Alternatively, you can run the application in a Docker container
-(using [the official MailTrigger Docker image](https://hub.docker.com/repository/docker/bjoernkw/mailtrigger)):
+(using [the official MailTrigger Docker image](https://hub.docker.com/r/bjoernkw/mailtrigger)):
 
 ```docker run -p 8080:8080 bjoernkw/mailtrigger```
 
