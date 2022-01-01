@@ -2,16 +2,12 @@ package com.bjoernkw.mailtrigger.mailer;
 
 import com.bjoernkw.mailtrigger.MailTriggerApplication;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MailTemplateLoaderTests {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
     void loadMailTemplate() {

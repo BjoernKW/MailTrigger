@@ -32,7 +32,7 @@
         <commonmark.version>0.18.1</commonmark.version>
         <commons-text.version>1.9</commons-text.version>
         <bootstrap.version>5.1.3</bootstrap.version>
-        <springdoc-openapi-ui.version>1.6.2</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.6.3</springdoc-openapi-ui.version>
     </properties>
 
     <dependencies>
@@ -95,6 +95,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

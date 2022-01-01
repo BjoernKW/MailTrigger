@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "mailTrigger.host",
+      "type": "java.lang.String",
+      "description": "The mail server host to be used for sending emails."
+    },
+    {
+      "name": "mailTrigger.port",
+      "type": "java.lang.String",
+      "description": "The mail server port to be used for sending emails."
+    },
+    {
+      "name": "mailTrigger.username",
+      "type": "java.lang.String",
+      "description": "The username to be used for sending emails."
+    },
+    {
+      "name": "mailTrigger.password",
+      "type": "java.lang.String",
+      "description": "The password to be used for sending emails."
+    },
+    {
+      "name": "mailTrigger.mail-template-directory",
+      "type": "java.lang.String",
+      "description": "The directory where mail templates are located."
+    }
+  ]
+}
