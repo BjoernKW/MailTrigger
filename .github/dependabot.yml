@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "maven-repository"
+    directory: "/"
+    schedule:
+      interval: "daily"
