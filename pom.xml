@@ -31,7 +31,7 @@
         <commonmark.version>0.18.1</commonmark.version>
         <commons-text.version>1.9</commons-text.version>
         <bootstrap.version>5.1.3</bootstrap.version>
-        <springdoc-openapi-ui.version>1.6.5</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
     </properties>
 
     <dependencies>
