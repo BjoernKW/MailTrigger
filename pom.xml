@@ -26,7 +26,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <rest-assured.version>4.5.1</rest-assured.version>
+        <rest-assured.version>5.0.0</rest-assured.version>
         <nekohtml.version>1.9.22</nekohtml.version>
         <commonmark.version>0.18.2</commonmark.version>
         <commons-text.version>1.9</commons-text.version>
