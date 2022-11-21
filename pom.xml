@@ -31,7 +31,7 @@
         <commonmark.version>0.21.0</commonmark.version>
         <commons-text.version>1.10.0</commons-text.version>
         <bootstrap.version>5.2.2</bootstrap.version>
-        <springdoc-openapi-ui.version>1.6.12</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.6.13</springdoc-openapi-ui.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
     </properties>
 
@@ -124,6 +124,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
