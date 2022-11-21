@@ -58,3 +58,6 @@ build/
 
 ### macOS ###
 .DS_Store
+
+###  Versions Maven Plugin ###
+pom.xml.versionsBackup
