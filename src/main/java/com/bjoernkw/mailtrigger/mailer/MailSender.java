@@ -1,13 +1,13 @@
 package com.bjoernkw.mailtrigger.mailer;
 
 import com.bjoernkw.mailtrigger.exceptions.MailException;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
