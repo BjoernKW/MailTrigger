@@ -25,7 +25,7 @@ class MailTemplateLoader {
         BufferedReader reader = null;
 
         try (InputStream inputStream = url.openStream()) {
-            reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8.name()));
+            reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
             boolean isReadingBodyText = false;
             boolean isReadingAttachment = false;
