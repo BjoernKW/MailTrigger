@@ -76,7 +76,7 @@ Once the app is started the REST API documentation will be available under
 
 ## Built With
 
-* [Spring Boot](https://projects.spring.io/spring-boot/)
+* [Spring Boot](https://spring.io/projects/spring-boot/)
 * [Maven](https://maven.apache.org/)
 * [Markdown](https://daringfireball.net/projects/markdown/)
 
