@@ -1,6 +1,5 @@
 # MailTrigger
 
-[![CircleCI](https://circleci.com/gh/BjoernKW/MailTrigger.svg?style=shield)](https://circleci.com/gh/BjoernKW/MailTrigger)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 MailTrigger is a service that allows you to asynchronously send emails using an HTTP API. Emails are represented as
@@ -77,7 +76,7 @@ Once the app is started the REST API documentation will be available under
 
 ## Built With
 
-* [Spring Boot](https://projects.spring.io/spring-boot/)
+* [Spring Boot](https://spring.io/projects/spring-boot/)
 * [Maven](https://maven.apache.org/)
 * [Markdown](https://daringfireball.net/projects/markdown/)
 
