@@ -27,8 +27,22 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
+      - name: Upload test results
+      - uses: actions/upload-artifact@v3  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
+        with:
+          name: test-results
+          path: target/surefire-reports/*.xml
+
+      - name: Upload HTML test report
+      - uses: actions/upload-artifact@v3  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
+        with:
+          name: test-results
+          path: site/*.html
+
       - name: Report test results
-        uses: dorny/test-reporter@v1.6.0
+        uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Maven test results
