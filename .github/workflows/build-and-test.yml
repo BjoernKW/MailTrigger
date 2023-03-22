@@ -27,6 +27,9 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
+      - name: Build HTML report
+        run: mvn --batch-mode surefire-report:report
+
       - name: Upload test results
         uses: actions/upload-artifact@v3  # upload test results
         if: success() || failure()        # run this step even if previous step failed
