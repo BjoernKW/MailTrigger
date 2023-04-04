@@ -33,12 +33,3 @@ jobs:
         with:
           name: test-results
           path: target/surefire-reports/*.xml
-
-      - name: Report test results
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Maven test results
-          path: target/surefire-reports/*.xml
-          reporter: java-junit
-          fail-on-error: true
