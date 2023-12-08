@@ -31,7 +31,7 @@
         <commonmark.version>0.21.0</commonmark.version>
         <commons-text.version>1.11.0</commons-text.version>
         <bootstrap.version>5.3.2</bootstrap.version>
-        <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.3.0</springdoc-openapi-starter-webmvc-ui.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
     </properties>
 
