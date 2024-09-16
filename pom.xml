@@ -28,7 +28,7 @@
         <java.version>17</java.version>
         <rest-assured.version>5.4.0</rest-assured.version>
         <nekohtml.version>1.9.22</nekohtml.version>
-        <commonmark.version>0.22.0</commonmark.version>
+        <commonmark.version>0.23.0</commonmark.version>
         <commons-text.version>1.12.0</commons-text.version>
         <bootstrap.version>5.3.3</bootstrap.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
