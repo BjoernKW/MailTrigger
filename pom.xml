@@ -30,7 +30,7 @@
         <nekohtml.version>1.9.22</nekohtml.version>
         <commonmark.version>0.24.0</commonmark.version>
         <commons-text.version>1.13.1</commons-text.version>
-        <bootstrap.version>5.3.3</bootstrap.version>
+        <bootstrap.version>5.3.5</bootstrap.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.8.6</springdoc-openapi-starter-webmvc-ui.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
     </properties>
