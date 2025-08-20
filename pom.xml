@@ -28,8 +28,8 @@
         <java.version>17</java.version>
         <rest-assured.version>5.4.0</rest-assured.version>
         <nekohtml.version>1.9.22</nekohtml.version>
-        <commonmark.version>0.25.0</commonmark.version>
-        <commons-text.version>1.13.1</commons-text.version>
+        <commonmark.version>0.25.1</commonmark.version>
+        <commons-text.version>1.14.0</commons-text.version>
         <bootstrap.version>5.3.7</bootstrap.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.8.10</springdoc-openapi-starter-webmvc-ui.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>
