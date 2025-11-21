@@ -1,67 +1,84 @@
 package com.bjoernkw.mailtrigger.controllers;
 
+import com.bjoernkw.mailtrigger.mailer.MailService;
+import com.bjoernkw.mailtrigger.mailer.MailTriggerConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
-import static org.hamcrest.CoreMatchers.equalTo;
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MailTriggerControllerTests {
 
+    @LocalServerPort
+    private int port;
+
     @Autowired
-    private MailTriggerController mailTriggerController;
+    private MailService mailService;
+
+    @Autowired
+    private MailTriggerConfig mailTriggerConfig;
+
+    private RestTestClient restTestClient;
 
     @BeforeEach
-    void setup() {
-        standaloneSetup(mailTriggerController);
+    public void setup() {
+        restTestClient =
+                RestTestClient
+                        .bindToController(
+                                new MailTriggerController(mailService, mailTriggerConfig)
+                        )
+                        .build();
     }
+
 
     @Test
     void testSendMail() {
         Map<String, String> replacements = new HashMap<>();
 
-        given()
-                .contentType("application/json;charset=UTF-8")
+        restTestClient
+                .post()
+                .uri("http://localhost:" + port + "/api/v1/sendMail/test_channel")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(replacements)
-                .when()
-                .post("/api/v1/sendMail/test_channel")
-                .then()
-                .statusCode(400);
+                .exchange()
+                .expectStatus().isBadRequest();
 
         replacements.put("TO", "bjoern@bjoernkw.com");
         replacements.put("FIRST_NAME", "John");
 
-        given()
-                .contentType("application/json;charset=UTF-8")
+        restTestClient
+                .post()
+                .uri("http://localhost:" + port + "/api/v1/sendMail/test_channel")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(replacements)
-                .when()
-                .post("/api/v1/sendMail/test_channel")
-                .then()
-                .statusCode(200)
-                .body("text", equalTo("Email has been sent."));
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.text").isEqualTo("Email has been sent.");
 
-        given()
-                .contentType("application/json;charset=UTF-8")
+        restTestClient
+                .post()
+                .uri("http://localhost:" + port + "/api/v1/sendMail/test_channel_with_custom_template")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(replacements)
-                .when()
-                .post("/api/v1/sendMail/test_channel_with_custom_template")
-                .then()
-                .statusCode(200)
-                .body("text", equalTo("Email has been sent."));
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.text").isEqualTo("Email has been sent.");
 
-        given()
-                .contentType("application/json;charset=UTF-8")
+        restTestClient
+                .post()
+                .uri("http://localhost:" + port + "/api/v1/sendMail/nonExistentChannel")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(replacements)
-                .when()
-                .post("/api/v1/sendMail/nonExistentChannel")
-                .then()
-                .statusCode(404);
+                .exchange()
+                .expectStatus().isNotFound();
     }
 }
