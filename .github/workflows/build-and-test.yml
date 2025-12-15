@@ -28,7 +28,7 @@ jobs:
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
       - name: Upload test results
-        uses: actions/upload-artifact@v5  # upload test results
+        uses: actions/upload-artifact@v6  # upload test results
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: test-results
