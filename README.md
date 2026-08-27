@@ -14,7 +14,7 @@ Alternatively, you can configure a custom template directory for loading email t
 
 ### Prerequisites
 
-* [Java 17](https://openjdk.org/projects/jdk/17/)
+* [Java 21](https://openjdk.org/projects/jdk/21/)
 * [Maven](https://maven.apache.org/)
 
 ### Running the app in dev mode
